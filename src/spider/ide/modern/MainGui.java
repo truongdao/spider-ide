@@ -93,7 +93,7 @@ public class MainGui extends SpiderIde {
 	}
 
 	private void initGUIComponents() {
-		setTitle("Scripting Lab");
+		setTitle("Spider v2 IDE");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		///////////////////////////////////////////////////////////////////////
