@@ -568,11 +568,19 @@ public class MainGui extends SpiderIde {
 		//0.3 show help 		
 		console.setText(	spider.constant.GUIDE_BUILTINS		);
 		
+
 		//1. load file content
 		if(spider.common.programs.isEmpty())
 			codeEditor.setText("outln(input());");
-		else 
-			loadFileContentToEditor(spider.common.programs.get(0));
+		else {
+			
+			//1.0 load file path
+			String file_path = spider.common.programs.get(0);
+			txtLibPath.setText(file_path);
+			
+			//1.1 load content
+			loadFileContentToEditor(file_path);
+		}
 		
 		//2. redirect standard streams
 		redirectStandardInOutputs();
