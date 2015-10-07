@@ -56,12 +56,15 @@ import javax.script.ScriptException;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.io.BufferedReader;
 import java.io.Console;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.io.PrintStream;
 import java.net.URL;
@@ -510,8 +513,9 @@ public class MainGui extends SpiderIde {
 	private void loadFileContentToEditor(String path) {
 		try{
 			String whole ="";
-			LineNumberReader nreader = new LineNumberReader(new FileReader(path));
-
+			BufferedReader nreader= new BufferedReader(
+           			new InputStreamReader(
+                      new FileInputStream(path), "UTF8"));
 			String line;
 			while((line=nreader.readLine())!=null){
 				whole += line+"\n";
