@@ -80,7 +80,7 @@ public class MainGui extends SpiderIde {
 	public static JTextPane console;
 	public static JTextArea codeEditor = null;
 	public static JScrollPane scrl_Code = null;
-	private JButton btnReset;
+	private JButton btnSave;
 	private JButton btnClear;
 	private JButton btnRun;
 	private JButton btnBrowser;
@@ -139,7 +139,7 @@ public class MainGui extends SpiderIde {
 		
 		
 		///////////////////////////////////////////////////////////////////////
-		btnReset = new JButton("Save");
+		btnSave = new JButton("Save");
 
 		
 		///////////////////////////////////////////////////////////////////////
@@ -159,7 +159,7 @@ public class MainGui extends SpiderIde {
 		gbc_btnReset.insets = new Insets(0, 0, 0, 5);
 		gbc_btnReset.gridx = 1;
 		gbc_btnReset.gridy = 0;
-		panel.add(btnReset, gbc_btnReset);
+		panel.add(btnSave, gbc_btnReset);
 		
 		txtLibPath = new JTextField();
 		txtLibPath.setText("./main.js");
@@ -335,15 +335,17 @@ public class MainGui extends SpiderIde {
 		});
 		
 		///////////////////////////////////////////////////////////////////////
-		btnReset.addActionListener(new ActionListener() {
+		btnSave.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				FileWriter writer;
 				try {
-					writer = new FileWriter(new File(txtLibPath.getText().trim()));
-					writer.write(codeEditor.getText());
-					writer.flush();
-					writer.close();
+					java.io.FileOutputStream f = new java.io.FileOutputStream(txtLibPath.getText().trim());
+					java.io.OutputStreamWriter chStream = new java.io.OutputStreamWriter(f, "UTF-8");
+					java.io.PrintWriter prt = new java.io.PrintWriter(chStream);
+					prt.print(codeEditor.getText());
+					prt.flush();
+					prt.close();
 				} catch (Exception e1) {
 					e1.printStackTrace();
 					System.err.println(e1.getMessage());
